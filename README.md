@@ -1,2 +1,2 @@
 # MarioRun
- Simple game using HTML and CSS :)
+ Game using HTML and CSS
