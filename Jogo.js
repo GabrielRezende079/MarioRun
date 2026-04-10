@@ -262,13 +262,6 @@ const updateScore = () => {
 }
 
 function handleKeyPress(event) {
-  // Only respond to Space or Up Arrow
-  if (event.code !== 'Space' && event.code !== 'ArrowUp') {
-    return;
-  }
-
-  event.preventDefault(); // Prevent scrolling
-
   if (!isGameStarted) {
     startGame();
     return;
