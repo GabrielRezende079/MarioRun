@@ -6,6 +6,7 @@ const gameOverScreen = document.getElementById('gameOver');
 const finalScoreElement = document.getElementById('finalScore');
 const restartBtn = document.getElementById('restartBtn');
 const playBtn = document.getElementById('playBtn');
+const bgMusic = document.getElementById('bgMusic');
 
 let gameLoop = null;
 let score = 0;
@@ -47,6 +48,11 @@ const startGame = () => {
   
   // Hide start menu
   startMenu.style.display = 'none';
+  
+  // Start music
+  bgMusic.volume = 0.3;
+  bgMusic.loop = true;
+  bgMusic.play().catch(err => console.log('Music autoplay failed:', err));
   
   // Reset Mario
   mario.src = 'Imagens/mario.gif';
@@ -160,6 +166,10 @@ const restartGame = () => {
   // Hide game over screen
   gameOverScreen.style.display = 'none';
   
+  // Restart music
+  bgMusic.currentTime = 0;
+  bgMusic.play().catch(err => console.log('Music restart failed:', err));
+  
   // Start game loop
   if (gameLoop) {
     clearInterval(gameLoop);
@@ -252,6 +262,13 @@ const updateScore = () => {
 }
 
 function handleKeyPress(event) {
+  // Only respond to Space or Up Arrow
+  if (event.code !== 'Space' && event.code !== 'ArrowUp') {
+    return;
+  }
+
+  event.preventDefault(); // Prevent scrolling
+
   if (!isGameStarted) {
     startGame();
     return;
